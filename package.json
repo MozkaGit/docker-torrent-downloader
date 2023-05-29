@@ -1,0 +1,20 @@
+{
+  "name": "torrent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nyaapi": "^2.4.4",
+    "parse-torrent": "^9.1.4",
+    "transmission": "^0.4.10",
+    "transmission-promise": "^1.1.5",
+    "yggtorrent": "^2.0.3"
+  }
+}
