@@ -1,0 +1,10 @@
+# plex-infra
+Prerequisite :
+- nodejs
+- npm
+- nyaapi
+- yggtorrent
+- transmission
+- forever
+- express
+- parse-torrent
