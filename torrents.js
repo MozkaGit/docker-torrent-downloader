@@ -6,18 +6,21 @@ const Transmission = require('transmission')
 const fs = require('fs');
 const app = express();
 const port = 3000;
+const config = require('./config')
+const path = require("path");
+const directory = "/mnt/Elements/Downloads/torrents/";
 var torrents;
 
 const transmission = new Transmission({
-  host: 'localhost',
-  port: 9091,
+  host: config.transmission.host,
+  port: config.transmission.port,
 });
 
 const client = new YGG(
-  'https://www3.yggtorrent.do',
-  'http://localhost:9999',
-  'vest95100',
-  'U@Tk9FCTBN@ect@VMb!_'
+  config.ygg.baseUrl,
+  config.ygg.flareSolverUrl,
+  config.ygg.username,
+  config.ygg.password
 );
 
 app.get('/ygg', (req, res) => {
@@ -65,6 +68,15 @@ si.search({
 
 app.get('/choice1', async (req, res) => {
   try {
+    fs.readdir(directory, (err, files) => {
+      if (err) throw err;
+    
+      for (const file of files) {
+        fs.unlink(path.join(directory, file), (err) => {
+          if (err) throw err;
+        });
+      }
+    });
     const number = req.query.number;
     if (!number || isNaN(number) || number < 0 || number > torrents.length) {
       throw new Error('Invalid number parameter');
@@ -72,11 +84,11 @@ app.get('/choice1', async (req, res) => {
     const buf = await client.getTorrent(torrents[number-1].id);
     const torrent = parseTorrent(buf);
     const uri = parseTorrent.toMagnetURI({infoHash: torrent.infoHash});
-    const ws = fs.createWriteStream('/mnt/Elements/Download/torrents/' + torrent.name + '.torrent');
+    const ws = fs.createWriteStream('/mnt/Elements/Downloads/torrents/' + torrent.name + '.torrent');
     ws.write(buf);
     ws.end();
     console.log(torrent.name)
-    transmission.addFile('/mnt/Elements/Download/torrents/' + torrent.name + '.torrent', (err, arg) => {
+    transmission.addFile('/mnt/Elements/Downloads/torrents/' + torrent.name + '.torrent', (err, arg) => {
       if (err) {
         console.log(err);
         res.status(500).send(err.message);
