@@ -1,0 +1,24 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Docker build and push
+      uses: cloudposse/github-action-docker-build-push@1.11.0
+      with:
+        organization: 'mozkadocker'
+        repository: 'torrents'
+        registry: 'registry.docker.com'
+        login: ${{ secrets.DOCKER_USERNAME }} 
+        password: ${{ secrets.DOCKER_PASSWORD }}
