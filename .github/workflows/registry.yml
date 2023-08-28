@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
@@ -14,42 +13,22 @@ env:
   IMAGE_NAME: torrents
 
 jobs:
-
-  build:
+  build_and_push:
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
+
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag mozkadocker/$IMAGE_NAME:$GITHUB_RUN_NUMBER
-
-    - name: Save Docker image artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: image
-        path: .
-
-  push:
-
-    name: Log in and Push image to Docker Hub
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-
-    - name: Download Docker image artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: image
-        path: .
 
     - name: Log in to Docker Hub
       uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
       with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-    
-    - uses: actions/checkout@v3
-    - name: Push
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Push to Docker Hub
       run: docker push mozkadocker/$IMAGE_NAME:$GITHUB_RUN_NUMBER
