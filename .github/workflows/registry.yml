@@ -11,7 +11,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: mozkadocker/torrents:v$GITHUB_RUN_NUMBER
+  IMAGE_NAME: mozkadocker/torrents:v${GITHUB_RUN_NUMBER}
 
 jobs:
 
