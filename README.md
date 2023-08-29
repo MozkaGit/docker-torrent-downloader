@@ -120,7 +120,7 @@ module.exports = config;
 
 ### Example
 
-Perform a search : `http://{{transmissionHost}}:3000/nyaa?anime={{your_query}}
+Perform a search : `http://{{transmissionHost}}:3000/nyaa?anime={{your_query}}`
 
 ![search](https://github.com/MozkaGit/torrent-downloader/assets/43102748/4158c390-95ce-4ec9-8c7e-5473da567629)
 
