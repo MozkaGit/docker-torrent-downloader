@@ -7,8 +7,6 @@ const fs = require('fs');
 const app = express();
 const port = 3000;
 const config = require('./config')
-const path = require("path");
-const directory = "torrents/";
 var torrents;
 
 const transmission = new Transmission({
@@ -68,16 +66,6 @@ si.search({
 
 app.get('/choice1', async (req, res) => {
   try {
-    fs.readdir(directory, (err, files) => {
-      if (err) throw err;
-
-      for (const file of files) {
-        fs.unlink(path.join(directory, file), (err) => {
-          if (err) throw err;
-        });
-      }
-    });
-
     const number = req.query.number;
     if (!number || isNaN(number) || number < 0 || number > torrents.length) {
       throw new Error('Invalid number parameter');
