@@ -1,4 +1,4 @@
-# Docker torrent downloader
+# Docker torrent downloader</br>[![Docker build and release](https://github.com/MozkaGit/torrent-downloader/actions/workflows/registry.yml/badge.svg)](https://github.com/MozkaGit/torrent-downloader/actions/workflows/registry.yml)
 
 This application allows you to download torrents from Yggtorrent and Nyaa.si using various APIs. You can run it with node.js or docker (recommended).
 
