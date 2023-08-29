@@ -57,7 +57,7 @@ services:
 
 ### Usage
 
-Regardless of which method you use to run your container, to interact with the application you'll need to use the endpoint api detailed a little further down in the documentation.
+Regardless of which method you use to run your container, to interact with the application you'll need to use the endpoint api [detailed a little further down](https://github.com/MozkaGit/torrent-downloader#api-endpoints) in the documentation.
 
 ### Environment Variables
 
@@ -110,7 +110,7 @@ module.exports = config;
 ### Usage
 1. Ensure you're in the project directory.
 2. Start the application: `node torrent.js`
-3. Use the API endpoints detailed below to use the downloader.
+3. Use the API endpoints [detailed below](https://github.com/MozkaGit/torrent-downloader#api-endpoints) to use the downloader.
 
 ## API Endpoints
 - `/ygg`: Performs a search on YGGTorrent and returns the results.
@@ -120,9 +120,13 @@ module.exports = config;
 
 ### Example
 
-Perform a search : `http://192.168.0.25:3000/nyaa?anime=one%piece`
+Perform a search : `http://{{transmissionHost}}:3000/nyaa?anime={{your_query}}
 
-Download a torrent : `http://192.168.0.25:3000/choice2?number=6`
+![search](https://github.com/MozkaGit/torrent-downloader/assets/43102748/4158c390-95ce-4ec9-8c7e-5473da567629)
+
+Download a torrent : `http://{{transmissionHost}}:3000/choice2?number={{your_number_query]]`
+
+![download](https://github.com/MozkaGit/torrent-downloader/assets/43102748/afddca2d-da46-4bc4-b92d-c542ef6568f8)
 
 You can use any method to interact with the Endpoints :
 
@@ -131,3 +135,6 @@ You can use any method to interact with the Endpoints :
 - With a curl request
 - With Apple Shortcuts
 - and so on.
+
+## Author
+MozkaGit
