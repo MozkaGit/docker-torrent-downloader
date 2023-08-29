@@ -8,19 +8,19 @@ const app = express();
 const port = 3000;
 const config = require('./config')
 const path = require("path");
-const directory = "/mnt/Elements/Downloads/torrents/";
+const directory = "torrents/";
 var torrents;
 
 const transmission = new Transmission({
-  host: config.transmission.host,
-  port: config.transmission.port,
+  host: process.env.TRANSMISSION_HOST,
+  port: process.env.TRANSMISSION_PORT,
 });
 
 const client = new YGG(
-  config.ygg.baseUrl,
-  config.ygg.flareSolverUrl,
-  config.ygg.username,
-  config.ygg.password
+  process.env.YGG_BASE_URL,
+  process.env.YGG_LOCAL_URL,
+  process.env.YGG_USERNAME,
+  process.env.YGG_PASSWORD
 );
 
 app.get('/ygg', (req, res) => {
@@ -70,13 +70,14 @@ app.get('/choice1', async (req, res) => {
   try {
     fs.readdir(directory, (err, files) => {
       if (err) throw err;
-    
+
       for (const file of files) {
         fs.unlink(path.join(directory, file), (err) => {
           if (err) throw err;
         });
       }
     });
+
     const number = req.query.number;
     if (!number || isNaN(number) || number < 0 || number > torrents.length) {
       throw new Error('Invalid number parameter');
@@ -84,23 +85,29 @@ app.get('/choice1', async (req, res) => {
     const buf = await client.getTorrent(torrents[number-1].id);
     const torrent = parseTorrent(buf);
     const uri = parseTorrent.toMagnetURI({infoHash: torrent.infoHash});
-    const ws = fs.createWriteStream('/mnt/Elements/Downloads/torrents/' + torrent.name + '.torrent');
+    const ws = fs.createWriteStream('torrents/' + torrent.name + '.torrent');
     ws.write(buf);
     ws.end();
-    console.log(torrent.name)
-    transmission.addFile('/mnt/Elements/Downloads/torrents/' + torrent.name + '.torrent', (err, arg) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send(err.message);
-      } else {
-        res.send(torrents[number-1].id);
-      }
-    });
+    console.log(torrent.name);
+
+    // Pause for 5 seconds
+    setTimeout(() => {
+      transmission.addFile('torrents/' + torrent.name + '.torrent', (err, arg) => {
+        if (err) {
+          console.log(err);
+          res.status(500).send(err.message);
+        } else {
+          res.send(torrents[number-1].id);
+        }
+      });
+    }, 2500);
+
   } catch (error) {
     console.log(error);
     res.status(400).send(error.message);
   }
 });
+
 
 app.get('/choice2', (req, res) => {
 const number = req.query.number;
