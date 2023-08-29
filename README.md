@@ -31,4 +31,4 @@ This is a Node.js application that performs torrent-related operations using var
 - `/ygg`: Performs a search on YGGTorrent and returns the results.
 - `/nyaa`: Performs a search on Nyaa.si and returns the results.
 - `/choice1`: Downloads a torrent from YGGTorrent and adds it to Transmission.
-- `/choice2`: Adds a torrent via its magnet link to Transmission.
+- `/choice2`: Adds a Nyaa.si torrent via its magnet link to Transmission.
