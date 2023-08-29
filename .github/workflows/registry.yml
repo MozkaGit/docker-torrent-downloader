@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker build and release
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 env:
   TARGET_PLATFORMS: linux/amd64,linux/arm64
   # Use docker.io for Docker Hub if empty
-  REGISTRY: docker.io
+  REGISTRY: mozkadocker
   # github.repository as <account>/<repo>
   IMAGE_NAME: torrents
 
@@ -25,7 +25,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4.6.0
         with:
-          images: mozkadocker/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=schedule
             type=ref,event=branch
