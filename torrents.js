@@ -12,8 +12,9 @@ var torrents;
 const transmission = new Transmission({
   host: process.env.TRANSMISSION_HOST,
   port: process.env.TRANSMISSION_PORT,
+  username: process.env.TRANSMISSION_USER,
+  password: process.env.TRANSMISSION_PASS
 });
-
 const client = new YGG(
   process.env.YGG_BASE_URL,
   process.env.YGG_LOCAL_URL,
