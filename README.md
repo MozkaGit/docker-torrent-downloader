@@ -108,6 +108,7 @@ const config = {
 
 module.exports = config;
 ```
+<sup>You will need to adapt the javascript code to point to the variables in the config.js file.</sup>
 
 ### Usage
 1. Ensure you're in the project directory.
