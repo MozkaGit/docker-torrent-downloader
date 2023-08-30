@@ -14,9 +14,9 @@ This application allows you to download torrents from Yggtorrent and Nyaa.si usi
 
 The application requires a Transmission server and a Yggtorrent user account (if you want to download from Yggtorrent too). If you don't have an account, please create one.
 
-The recommended way of running this application is by using Docker. A Docker image is available on Docker Hub and installation instructions are detailed below.
+The recommended way of running this application is by using Docker. A Docker image is available on [Docker Hub](https://hub.docker.com/r/mozkadocker/torrents) and installation instructions are detailed below.
 
-This application can also be run natively with Node.js, see the detailed instructions.
+This application can also be run natively with Node.js, see the detailed instructions below.
 
 
 ## Docker installation
@@ -63,21 +63,21 @@ Regardless of which method you use to run your container, to interact with the a
 
 Tweak these environment variables to modify the config as needed:
 
-- YGG_BASE_URL: The url of yggtorrent. Since they often change their domain name, this variable will undoubtedly be useful to you.
+- `YGG_BASE_URL`: The url of yggtorrent. Since they often change their domain name, this variable will undoubtedly be useful to you.
 
-- FLARESOLVER_URL: The url of your FlareSolver instance. To avoid CloudFlare blocking.
+- `FLARESOLVER_URL`: The url of your FlareSolver instance. To avoid CloudFlare blocking.
 
-- YGG_USERNAME: Your yggtorrent account username.
+- `YGG_USERNAME`: Your yggtorrent account username.
 
-- YGG_PASSWORD: Your yggtorrent account password.
+- `YGG_PASSWORD`: Your yggtorrent account password.
 
-- TRANSMISSION_HOST: The address of your Transmission server WEB UI.
+- `TRANSMISSION_HOST`: The address of your Transmission server WEB UI.
 
-- TRANSMISSION_PORT: The port of your Transmission server WEB UI.
+- `TRANSMISSION_PORT`: The port of your Transmission server WEB UI.
 
-- TRANSMISSION_USER: Username of your Transmission server WEB UI.
+- `TRANSMISSION_USER`: Username of your Transmission server WEB UI.
 
-- TRANSMISSION_PASS: Password of your Transmission server WEB UI.
+- `TRANSMISSION_PASS`: Password of your Transmission server WEB UI.
 
 ## Node.js installation
 
@@ -103,6 +103,8 @@ const config = {
     password: 'password',
   },
 };
+
+*
 
 module.exports = config;
 ```
