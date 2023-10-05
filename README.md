@@ -53,6 +53,22 @@ services:
         volumes:
             - './torrents/:/app/torrents/'
         image: 'mozkadocker/torrents:main'
+
+    transmission:
+      image: linuxserver/transmission
+      container_name: transmission
+      environment:
+        - PUID=1000
+        - PGID=1000
+        - TZ=Europe/Paris
+      volumes:
+        - ./config:/config
+        - ./downloads:/downloads
+      ports:
+        - 9091:9091
+        - 51413:51413
+        - 51413:51413/udp
+      restart: unless-stopped
 ```
 
 ### Usage
