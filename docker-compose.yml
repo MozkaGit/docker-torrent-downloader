@@ -8,7 +8,7 @@ services:
         environment:
             - YGG_USERNAME=your_username
             - YGG_PASSWORD=your_password
-            - TRANSMISSION_HOST=localhost
+            - TRANSMISSION_HOST=transmission_host
         volumes:
             - './torrents/:/app/torrents/'
         image: 'mozkadocker/torrents:main'
